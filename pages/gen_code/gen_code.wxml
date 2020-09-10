@@ -1,0 +1,20 @@
+<page-meta1 page-style="background:linear-gradient(to right,#FF8300,#FF7300);color:white">
+</page-meta1>
+
+<view class="container">
+  <view class="view-form">
+    <form bindsubmit="bindFormSubmit">
+      <picker bindchange="bindPickerChange" model:value="{{index}}" range="{{schemas}}" class="item border-1" style="color: red;">
+        <view wx:if="{{index > 0}}" class="picker">
+          已选择协议：{{schemas[index]}}。以下URL不可包含协议。
+        </view>
+        <view wx:else class="picker">
+          没有选择协议。以下URL必须包含协议。
+        </view>
+      </picker>
+      <textarea name="origin_text" style="min-height:50px;color:black;" class="item border-1" model:value="{{origin_text}}" auto-height="true" placeholder="输入原始文本,最多100个文字." placeholder-style="color: red;" maxlength="100">
+      </textarea>
+      <button class="item" size="default" type="primary" form-type="submit"> 生成二维码 </button>
+    </form>
+  </view>
+</view>

@@ -1,0 +1,17 @@
+<page-meta1 page-style="background:linear-gradient(to right,#FF8300,#FF7300)">
+</page-meta1>
+
+<view class="container" style="padding-top:150px">
+  <view class="page-body">
+    <view>
+      <cover-image src="{{shopImg}}" class="shopImg"></cover-image>
+      <view style="text-align:center;margin-top:5px;">
+        <text>{{shopName}}</text>
+      </view>
+      <view style="margin-top:20px">{{progressText}}</view>
+      <view class="progress-box">
+        <progress percent="100" active stroke-width="3" bindactiveend="goNext"/>
+      </view>
+    </view>    
+  </view>
+</view>

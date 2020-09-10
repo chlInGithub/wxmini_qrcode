@@ -1,0 +1,15 @@
+<page-meta1 page-style="background:linear-gradient(to right,#FF8300,#FF7300);color:white">
+</page-meta1>
+
+<view class="container">
+  <view class="view-form">
+    <textarea name="origin_text" style="min-height:50px;color:black;" 
+      class="item border-1"
+      bindblur="checkOriginValue" model:value="{{codeResult}}" auto-height="true"
+      placeholder="扫描结果."  placeholder-style="color: red;" maxlength="100">
+    </textarea>
+    <button bindtap="do_see_code" class="item" size="default" type="primary"> 识别二维码 </button>
+  </view>
+  <image wx:if="{{text}}" mode="widthFix" src="{{text}}"></image>
+</view>
+
