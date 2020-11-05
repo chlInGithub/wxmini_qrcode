@@ -1,0 +1,57 @@
+<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+</page-meta>
+
+<view class="container">
+  <view class="ptb10 outter-view">
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">活码ID</view>
+        <view class="col70 fr">{{smartCodeId}}</view>
+        <view class="clearboth"></view>
+    </view>
+  </view>
+  <view class="ptb10 outter-view not-first-outter">
+    <view wx:if="{{img}}" class="cell mt10 fs8 pl10 pr10">
+      <image class="smart-code-img" src="{{imgPrefix + img}}" show-menu-by-longpress='true'></image>
+    </view>
+    
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">元素ID</view>
+        <view class="col70 fl input-view"><input disabled="disabled" type="text" value="{{id}}"></input></view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">元素标题</view>
+        <view class="col70 fl input-view"><input type="text" model:value="{{title}}" maxlength='10' placeholder="最多10个字符"></input></view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">优先级</view>
+        <view class="col70 fl input-view"><input type="number" model:value="{{sort}}" maxlength='99999' placeholder="最多99999"></input></view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">选择次数上限</view>
+        <view class="col70 fl input-view"><input type="number" model:value="{{showMax}}" maxlength='99999' placeholder="最多99999"></input></view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">已选择次数</view>
+        <view class="col70 fl input-view">{{showCount}}</view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">元素码</view>
+        <view class="col70 fl input-view">
+          <view class="operate-view">
+            <view class="button fr" bindtap="chooseImg">选择图片</view>
+          </view>
+        </view>
+        <view class="clearboth"></view>
+    </view>
+  </view>
+  <view class="ptb10 outter-view not-first-outter">
+    <button class="fs8 big-button" type="primary" bindtap="saveEle">保存</button>
+  </view>
+</view>
+
+

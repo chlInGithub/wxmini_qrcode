@@ -1,38 +1,48 @@
-<page-meta1 page-style="background:linear-gradient(to right,#FF8300,#FF7300);color:white">
-</page-meta1>
+<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+</page-meta>
 
 <view class="container">
-  <view style="display:none" class="width-full">
-    <view bindtap="go_gen_code" hover-class="click-1" class="padding-tb-2 width-half text-c fl bk-2 border-1 margin-l-1 border-radius-1">
-      我要二维码
+  <view class="full-width-view view-head">
+    <view class="border-1  border-blue"></view>
+  </view>
+  <view class="full-width-view">
+    <view class="view-hand fl">
+      <view class="left-hand border-1  border-red"></view>
+    </view>
+    <view class="fl">
+      <view class="view-chest">
+        <view bindtap="go_gen_code" class="item item-1 border-1 border-red">
+          我要二维码
+        </view>
+
+        <view bindtap="go_see_code" class="item item-2 border-1 border-red">
+          看看二维码
+        </view>
+      </view>
+      <view class="view-body fr">
+        <view bindtap="go_smart_code" class="item border-2 border-gray">
+          活群码
+        </view>
+      </view>
     </view>
 
-    <view bindtap="go_see_code" class="padding-tb-2 width-half text-c fr bk-3 border-1 margin-r-1 border-radius-1">
-      看看二维码
+    <view class="view-hand fr">
+      <view class="right-hand border-2  border-red"></view>
+    </view>
+    <view class="clearboth"></view>
+
+  </view>
+  <view class=" full-width-view">
+    <view class="view-leg">
+      <view class="left-leg fl border-2 border-blue">
+
+      </view>
+      <view class="right-leg fr border-2 border-blue">
+
+      </view>
+      <view class="clearboth"></view>
     </view>
   </view>
 
-  <view  style="display:none" class="width-full margin-t-5">
-    <view bindtap="go_smart_code" class="padding-tb-2 text-c bk-3 border-1 margin-l-1 margin-r-1 border-radius-1">
-      活群码
-    </view>
-  </view>
-
-
-  <view class="view-row-2">
-    <view bindtap="go_gen_code" class="item item-1 border-1">
-      我要二维码
-    </view>
-
-    <view bindtap="go_see_code" class="item item-2 border-1">
-      看看二维码
-    </view>
-  </view>
-
-  <view  class="view-row-1">
-    <view class="item border-2">
-      活群码
-    </view>
-  </view>
 
 </view>

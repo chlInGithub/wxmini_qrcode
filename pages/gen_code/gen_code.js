@@ -1,4 +1,9 @@
 // pages/gen_code/gen_code.js
+const util = require('../../utils/util.js')
+const goPageUtil = require('../../utils/goPage.js')
+const requestUtil = require('../../utils/request.js')
+const requestDataUtil = require('../../utils/requestData.js')
+
 Page({
 
   /**
@@ -57,30 +62,6 @@ Page({
         })
       }
     })
-
-
-    // ios 真机 有数据返回但一直黑屏，所以采用如下方式。
-    /*wx.getImageInfo({
-      src: codeUrl,
-      success: function(res){
-        console.log(res)
-        wx.previewImage({
-          urls: [res.path],
-          success: function (res) {
-            console.log(res)
-          },
-          fail: function (res) {
-            console.log(res)
-            wx.showToast({
-              title: res,
-            })
-          }
-        })
-      },
-      fail: function(res){
-        console.log(res)
-      }
-    })*/
   },
 
   /**

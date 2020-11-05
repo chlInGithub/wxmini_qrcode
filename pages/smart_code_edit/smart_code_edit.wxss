@@ -1,0 +1,9 @@
+/* pages/smart_code_edit/smart_code_edit.wxss */
+.smart-code-owner-img{
+  width: 40px;
+  height: 40px;
+}
+.smart-code-img{
+  width: 45vw;
+  height: 45vw;
+}

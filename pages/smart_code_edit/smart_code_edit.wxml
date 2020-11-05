@@ -1,0 +1,72 @@
+<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+</page-meta>
+
+<view class="container">
+  <view class="ptb10 outter-view bk-green">
+    <view wx:if="{{smartCode.codeImg}}" class="cell mt10 fs8 pl10 pr10">
+      <image class="smart-code-img" src="{{imgPrefix + smartCode.codeImg}}" show-menu-by-longpress='true'></image>
+    </view>
+    
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">活码ID</view>
+        <view class="col70 fl input-view"><input disabled="disabled" type="text" value="{{smartCode.id}}"></input></view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">活码标题</view>
+        <view class="col70 fl input-view"><input type="text" model:value="{{smartCodeTitle}}" maxlength='10' placeholder="最多10个字符"></input></view>
+        <view class="clearboth"></view>
+    </view>
+    <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">中间图片</view>
+        <view class="col70 fl input-view">
+          <view class="operate-view">
+            <view class="button fr" bindtap="chooseOwnerImg">选择图片</view>
+          </view>
+          <view wx:if="{{smartCodeOwnerImg}}" class="fr inline-block">
+            <image class="smart-code-owner-img" src="{{imgPrefix + smartCodeOwnerImg}}"></image>
+          </view>
+        </view>
+        <view class="clearboth"></view>
+    </view>
+  </view>
+  <block wx:for="{{eles}}">
+    <view class="ptb10 outter-view  not-first-outter">
+      <view class="cell mt10 fs8 pl10 pr10">
+          <view class="col20 fl">元素标题</view>
+          <view class="col70 fl ta-r">{{item.title}}<text wx:if="{{item.cache}}" class="cred fs6">(临)</text></view>
+        <view class="clearboth"></view>
+      </view>
+      <view class="cell mt10 fs8 pl10 pr10">
+          <view class="col20 fl">优先级</view>
+          <view class="col70 fl ta-r">{{item.sort}}</view>
+        <view class="clearboth"></view>
+      </view>
+      
+      <view class="cell mt10 fs8 pl10 pr10">
+          <view class="col20 fl">选择上限</view>
+          <view class="col70 fl ta-r">{{item.showMax}}<text wx:if="{{item.showMax <= item.showCount}}" class="cred fs6">(已达)</text></view>
+        <view class="clearboth"></view>
+      </view>
+      <view class="cell mt10 fs8 pl10 pr10">
+          <view class="col20 fl">当前选择次数</view>
+          <view class="col70 fl ta-r">{{item.showCount}}</view>
+        <view class="clearboth"></view>
+      </view>
+      <view wx:if="{{item.img}}" class="cell mt10 fs8 pl10 pr10">
+        <image class="smart-code-img" src="{{imgPrefix + item.img}}" show-menu-by-longpress='true'></image>
+      </view>
+      <view class="cell mt10 fs8 pl10 pr10 operate-view">
+        <view class="button fr mr10" bindtap="editEle" data-id="{{item.id}}">编辑</view>
+        <view class="button fr mr10" bindtap="delEle" data-id="{{item.id}}">删除</view>
+        <view class="clearboth"></view>
+      </view>
+    </view>
+  </block>
+  <view class="ptb10 outter-view not-first-outter" wx:if="{{!saveDone}}">
+    <button class="fs8 big-button" type="primary" bindtap="editEle">新增元素</button>
+    <button class="fs8 big-button mt10" type="primary" bindtap="save">保存</button>
+  </view>
+</view>
+
+

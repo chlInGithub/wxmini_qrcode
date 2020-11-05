@@ -1,0 +1,33 @@
+<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+</page-meta>
+
+<view class="container">
+  <view class="ptb10 outter-view">
+        <button class="fs8 big-button" type="primary" bindtap="goSmartCodeDetail">新建活码</button>
+  </view>
+  <block wx:if="{{smartCodes}}" wx:for="{{smartCodes}}" wx:key="*this">
+    <view class="outter-view order-view not-first-outter">
+      <view>
+        <view class="inline-block ptb10">
+          <view class="col45 fl img-view" bindtap="goSmartCodeDetail" data-id="{{item.id}}">
+            <image class="smart-code-img" src="{{imgPrefix + item.codeImg}}" show-menu-by-longpress='true'></image>
+          </view>
+          <view class="fr col50 content">
+            <view class="fs8 mt3">{{item.title}}</view>
+            <view class="operate-view">
+              <view class="col15 fr button"  data-id="{{item.id}}" bindtap="delSmartCode">删除</view>
+              <view class="clearboth"></view>
+            </view>
+            
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{smartCodes == undefined || smartCodes.length < 1}}">
+    <button class="fs8 mt10 big-button" type="default" bindtap="goShop">暂无数据</button>
+  </block>
+  <block wx:if="{{smartCodes.length > 0 && hasGotAll === false}}">
+    <button class="fs8 mt10 big-button not-first-outter" type="primary" bindtap="getSmartCodess">更多</button>
+  </block>
+</view>

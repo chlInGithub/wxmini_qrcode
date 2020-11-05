@@ -1,0 +1,5 @@
+/* pages/smart_code/smart_code.wxss */
+.smart-code-img{
+  width: 45vw;
+  height: 45vw;
+}

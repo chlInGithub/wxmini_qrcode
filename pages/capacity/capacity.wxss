@@ -1,1 +1,75 @@
 /* pages/capacity/capacity.wxss */
+
+.full-width-view{
+  width: 100vw;
+  margin-top: 5px;
+}
+.view-head{
+}
+.view-head view{
+  height: 10vw;
+  width: 10vw;
+  margin-left: 45vw;
+  transform: rotate(-10deg);
+}
+
+.view-hand{
+  width: 20vw;
+  margin-top: 5px;
+}
+.view-hand .left-hand{
+  width: 10vw;
+  margin-left: 5vw;
+  height: 50vw;
+  transform: rotate(4deg);
+}
+.view-hand .right-hand{
+  width: 10vw;
+  margin-left: 5vw;
+  height: 50vw;
+  transform: rotate(-4deg);
+}
+
+.view-chest{
+  width: 60vw;
+  margin-top: 5px;
+}
+.view-chest .item {
+  width:46%;
+  padding: 2rem 0;
+  text-align: center;
+  border-radius: .5rem;
+  margin: auto;
+}
+.view-chest .item-1 {
+  float: left;
+}
+.view-chest .item-2 {
+  float: right;
+}
+
+
+.view-body{
+  width: 60vw;
+  margin-top: 5px;
+}
+.view-body .item {
+  padding: 2rem 0;
+  text-align: center;
+  border-radius: .5rem;
+}
+
+.view-leg{
+  width: 60vw;
+  margin-top: 5px;
+  margin-left: 20vw;
+}
+.view-leg .left-leg{
+  width: 15vw;
+  height: 60vw;
+  transform: rotate(15deg);
+}
+.view-leg .right-leg{
+  width: 15vw;
+  height: 60vw;
+}

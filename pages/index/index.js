@@ -1,11 +1,16 @@
 //index.js
+const util = require('../../utils/util.js')
+const goPageUtil = require('../../utils/goPage.js')
+const requestUtil = require('../../utils/request.js')
+const requestDataUtil = require('../../utils/requestData.js')
+
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
     shopImg: "https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoW63kUFCfRksZLhgXTxicxU86sRibPnzibJFeaqj3m5Qeh8eLHZgCODT2oicvDwicYDZk0wrSQf4Sv9Tw/132",
-    shopName: "码码头",
+    shopName: "变.码",
     progressText: "正在努力打开页面……"
   },
   //事件处理函数
@@ -23,10 +28,7 @@ Page({
 
         // TODO 
         // return
-
-        wx.redirectTo({
-          url: '../capacity/capacity'
-        })
+        goPageUtil.goPage.goCapacity()
       }
     })
   },

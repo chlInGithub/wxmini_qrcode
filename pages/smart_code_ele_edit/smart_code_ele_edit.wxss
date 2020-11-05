@@ -1,0 +1,5 @@
+/* pages/smart_code_ele_edit/smart_code_ele_edit.wxss */
+.smart-code-img{
+  width: 45vw;
+  height: 45vw;
+}

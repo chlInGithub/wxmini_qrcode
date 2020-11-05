@@ -1,5 +1,5 @@
-<page-meta1 page-style="background:linear-gradient(to right,#FF8300,#FF7300);color:white">
-</page-meta1>
+<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+</page-meta>
 
 <view class="container">
   <view class="view-form">

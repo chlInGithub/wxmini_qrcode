@@ -3,10 +3,13 @@
     "pages/index/index",
     "pages/capacity/capacity",
     "pages/logs/logs",
-
     "pages/gen_code/gen_code",
-    "pages/see_code/see_code"
+    "pages/see_code/see_code",
+    "pages/smart_code/smart_code",
+    "pages/smart_code_edit/smart_code_edit",
+    "pages/smart_code_ele_edit/smart_code_ele_edit"
   ],
+  "entryPagePath": "pages/capacity/capacity",
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
