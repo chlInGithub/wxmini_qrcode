@@ -2,12 +2,14 @@
 </page-meta>
 
 <view class="container">
-  <view class="full-width-view view-head">
-    <view class="border-1  border-blue"></view>
+  <view class="full-width-view view-head mt5">
+    <view><image src="/img/hand.jpg" mode="aspectFix"></image></view>
   </view>
-  <view class="full-width-view">
+  <view class="full-width-view" style="z-index: 100">
     <view class="view-hand fl">
-      <view class="left-hand border-1  border-red"></view>
+      <view class="left-hand">
+        <image src="/img/left-hand.jpg" mode="aspectFix"></image>
+      </view>
     </view>
     <view class="fl">
       <view class="view-chest">
@@ -27,22 +29,23 @@
     </view>
 
     <view class="view-hand fr">
-      <view class="right-hand border-2  border-red"></view>
+      <view class="right-hand">
+        <image src="/img/right-hand.jpg" mode="aspectFix"></image>
+      </view>
     </view>
     <view class="clearboth"></view>
 
   </view>
-  <view class=" full-width-view">
+  <view class=" full-width-view"  style="z-index: 1">
     <view class="view-leg">
-      <view class="left-leg fl border-2 border-blue">
-
+      <view class="left-leg fl">
+        <image src="/img/left-leg.jpg" mode="aspectFix"></image>
       </view>
-      <view class="right-leg fr border-2 border-blue">
-
+      <view class="right-leg fr">
+        <image src="/img/right-leg.jpg" mode="aspectFix"></image>
       </view>
       <view class="clearboth"></view>
     </view>
   </view>
-
-
 </view>
+<view class="fs5 footer" style="top:-1rem">由博予科技提供技术支持</view>

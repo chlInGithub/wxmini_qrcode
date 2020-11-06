@@ -2,15 +2,17 @@
 
 .full-width-view{
   width: 100vw;
-  margin-top: 5px;
 }
 .view-head{
 }
 .view-head view{
-  height: 10vw;
-  width: 10vw;
-  margin-left: 45vw;
-  transform: rotate(-10deg);
+  height: 20vw;
+  width: 20vw;
+  margin-left: 40vw;
+}
+.view-head view image{
+  height: 20vw;
+  width: 20vw;
 }
 
 .view-hand{
@@ -18,16 +20,22 @@
   margin-top: 5px;
 }
 .view-hand .left-hand{
-  width: 10vw;
-  margin-left: 5vw;
+  width: 15vw;
+  margin-left: 6vw;
   height: 50vw;
-  transform: rotate(4deg);
+}
+.view-hand .left-hand image{
+  width: 15vw;
+  height: 50vw;
 }
 .view-hand .right-hand{
-  width: 10vw;
-  margin-left: 5vw;
+  width: 15vw;
+  margin-left: 0vw;
   height: 50vw;
-  transform: rotate(-4deg);
+}
+.view-hand .right-hand image{
+  width: 15vw;
+  height: 50vw;
 }
 
 .view-chest{
@@ -43,15 +51,18 @@
 }
 .view-chest .item-1 {
   float: left;
+  background: linear-gradient(      170deg,        rgba(255,255,255,0.9) 0%,      rgba(255,255,255,0.7) 20%,      rgba(21, 210, 210, 0.2) 55%,      rgba(21,210,210,0.2) 56%,      rgba(0,0,0,0.0) 100%    );
 }
 .view-chest .item-2 {
   float: right;
+  background: linear-gradient(      -170deg,        rgba(255,255,255,0.9) 0%,      rgba(255,255,255,0.7) 20%,      rgba(21, 210, 210, 0.2) 55%,      rgba(21,210,210,0.2) 56%,      rgba(0,0,0,0.0) 100%    );
 }
 
 
 .view-body{
   width: 60vw;
   margin-top: 5px;
+  background-color: white;
 }
 .view-body .item {
   padding: 2rem 0;
@@ -61,15 +72,22 @@
 
 .view-leg{
   width: 60vw;
-  margin-top: 5px;
   margin-left: 20vw;
+  margin-top: -18px;
 }
 .view-leg .left-leg{
-  width: 15vw;
+  width: 20vw;
   height: 60vw;
-  transform: rotate(15deg);
+}
+.view-leg .left-leg image{
+  width: 20vw;
+  height: 60vw;
 }
 .view-leg .right-leg{
-  width: 15vw;
+  width: 20vw;
+  height: 60vw;
+}
+.view-leg .right-leg image{
+  width: 20vw;
   height: 60vw;
 }
