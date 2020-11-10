@@ -1,6 +1,6 @@
 const util = require("./util.js")
 const goPageUtil = require("./goPage.js")
-//const aesUtil = require("./aes.js")
+const aesUtil = require("./aes.js")
 
 /**
  * url: 请求url
@@ -9,7 +9,7 @@ const goPageUtil = require("./goPage.js")
  * steps: 
  *  data key 正序，k=v并使用&拼接；拼接其他数据并使用&拼接；生成sign并拼接
  */
-/*var dealParams = function(url, data) {
+var dealParams = function(url, data) {
   if (util.objectUtil.isUndefined(data)) {
     data = {}
   }
@@ -53,7 +53,7 @@ const goPageUtil = require("./goPage.js")
 
   //finalData = encodeURI(finalData)
   return finalData
-}*/
+}
 
 var checkApp = function(){
   if (!util.objectUtil.verifyValidObject(getApp().globalData.appId) || !util.objectUtil.verifyValidObject(getApp().globalData.shopId)){
@@ -71,7 +71,7 @@ var checkApp = function(){
  *  failCallBack: failCallBack
  * }
  */
-/*var request = function(context) {
+var request = function(context) {
   var url = context.url
   if (util.stringUtil.isEmpty(url)) {
     util.showMsg("缺少URL")
@@ -98,7 +98,7 @@ var checkApp = function(){
   /*if (!util.stringUtil.isEmpty(context.contentType)) {
     contentType = context.contentType
   }*/
-/*
+
   var successCallBack = context.successCallBack
   if (typeof successCallBack !== 'function') {
     successCallBack = function() {}
@@ -177,7 +177,7 @@ var checkApp = function(){
       }
     }
   })
-}*/
+}
 
 /**
  * context = {
@@ -294,9 +294,9 @@ var requestProxy = function (context){
   // TODO 是否需要刷新token
 
 
-  //request(context)
+  request(context)
 
-  requestJson(context)
+  //requestJson(context)
 }
 
 

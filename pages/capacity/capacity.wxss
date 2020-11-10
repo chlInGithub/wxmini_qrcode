@@ -62,12 +62,12 @@
 .view-body{
   width: 60vw;
   margin-top: 5px;
-  background-color: white;
 }
 .view-body .item {
   padding: 2rem 0;
   text-align: center;
   border-radius: .5rem;
+  background-color: white;
 }
 
 .view-leg{

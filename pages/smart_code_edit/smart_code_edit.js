@@ -13,6 +13,24 @@ Page({
 
   },
 
+  tempModify: function(){
+    var data = {
+      id: this.data.smartCode.id,
+      title: this.data.smartCodeTitle,
+      ownerImg: this.data.smartCodeOwnerImg,
+      codeImg: util.objectUtil.verifyValidObject(this.data.smartCode.codeImg) ? this.data.smartCode.codeImg : "",
+      eles: util.objectUtil.verifyValidObject(this.data.eles) ?  this.data.eles : [],
+      cache: true
+    }
+    getApp().addCache("tempSmartCode", data, undefined, true)
+  },
+
+  bindblur4title: function(){
+    if(this.data.smartCode.title != this.data.smartCodeTitle){
+      this.tempModify()
+    }
+  },
+
   save:function(){
     var data = {
       id: this.data.smartCode.id,
@@ -38,11 +56,13 @@ Page({
           saveDone: true
         })
 
-        try {
-          getApp().delCache(that.data.smartCode.id)
-        } catch (e) {
-          // Do something when catch error
+        var temp = getApp().getCache("tempSmartCode", true)
+        if(util.objectUtil.verifyValidObject(temp)){
+          if(temp.id == that.data.smartCode.id){
+            getApp().delCache("tempSmartCode", true)
+          }
         }
+        
       }
       )
   },
@@ -66,6 +86,8 @@ Page({
           smartCodeOwnerImg: that.data.smartCodeOwnerImg,
           smartCode: that.data.smartCode
         })
+
+        that.tempModify()
       }
     )
   },
@@ -78,21 +100,6 @@ Page({
     }
     var that = this
 
-    if(ele.cache){
-      try {
-        var key = that.data.smartCode.id
-        var value = getApp().getCache(key)
-        if (util.objectUtil.verifyValidObject(value)) {
-          util.arrayUtil.delEleById(value, id)
-          try {
-            wx.setStorageSync(key, value)
-          } catch (e) { 
-          }
-        }
-      } catch (e) {
-        // Do something when catch error
-      }
-    }
     requestDataUtil.postData.delSmartCodeEle(
       {id:id, smartCodeId:this.data.smartCode.id}, 
       function(){
@@ -102,6 +109,8 @@ Page({
           smartCode: that.data.smartCode,
           eles: that.data.eles
         })
+
+        that.tempModify()
       }
     )
   },
@@ -151,13 +160,14 @@ Page({
   appendLocalEle: function(that){
     try {
       var key = that.data.smartCode.id
-      var value = getApp().getCache(key)
+      var value = getApp().getCache(key, true)
       if (util.objectUtil.verifyValidObject(value) && value.length > 0) {
         var cache = value[0]
         var old = util.arrayUtil.getEleById(that.data.eles, cache.id)
         if(util.objectUtil.verifyValidObject(old)){
           old.title = cache.title
-          old.showMax = cache.showMsg
+          old.sort = cache.sort
+          old.showMax = cache.showMax
           old.img = cache.img
           old.cache = cache.cache
           that.setData({
@@ -172,11 +182,13 @@ Page({
           })
         }
         
-        getApp().delCache(key)
+        getApp().delCache(key, true)
+        return true
       }
     } catch (e) {
       // Do something when catch error
     }
+    return false
   },
 
   /**
@@ -185,10 +197,25 @@ Page({
   onShow: function () {
     if(this.data.isNew){
       this.appendLocalEle(this)
+      this.tempModify()
       return true
     }
 
     var that = this
+    var tempSmartCode = getApp().getCache("tempSmartCode", true)
+    if(util.objectUtil.verifyValidObject(tempSmartCode) && tempSmartCode.id == this.data.smartCode.id){
+        var smartCode = tempSmartCode
+        that.setData({
+          smartCode: smartCode,
+          smartCodeTitle: smartCode.title,
+          smartCodeOwnerImg: smartCode.ownerImg,
+          eles: util.objectUtil.verifyValidObject(smartCode.eles) ? smartCode.eles : []
+        })
+        that.appendLocalEle(that)
+        that.tempModify()
+        return
+    }
+
     requestDataUtil.getData.smartCode(
       this.data.smartCode.id,
       function(data){
@@ -202,7 +229,10 @@ Page({
           smartCodeOwnerImg: smartCode.ownerImg,
           eles: smartCode.eles
         })
-        that.appendLocalEle(that)
+        var append = that.appendLocalEle(that)
+        if(append){
+          that.tempModify()
+        }
       }
     )
   },
@@ -218,11 +248,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    try {
-      wx.removeStorageSync(this.data.smartCode.id)
-    } catch (e) {
-      // Do something when catch error
-    }
+
   },
 
   /**

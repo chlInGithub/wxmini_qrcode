@@ -106,6 +106,22 @@ const ArrayUtil = {
     var ele = arrays.find((ele, index, arrays) => ele.id == id)
     return ele
   },
+  replaceEleById: function(arrays, newEle) {
+    if(!ObjectUtil.verifyValidObject(arrays)){
+      return
+    }
+    if(!ObjectUtil.verifyValidObject(newEle.id)){
+      return
+    }
+    for (let index = 0; index < arrays.length; index++) {
+      const element = arrays[index];
+      if(element.id == newEle.id){
+        arrays[index] = newEle
+        return index
+      }
+    }
+    return -1
+  },
   addEle: function(arrays, ele) {
     if(!ObjectUtil.verifyValidObject(arrays)){
       return

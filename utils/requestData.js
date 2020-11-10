@@ -6,7 +6,7 @@ var postData = {
   /**
    * 生成活码ID
    */
-  newSmartCode: function (sucCallback, failCallBack) {
+  newSmartCode: function (sucCallback, failCallback) {
     var checkResult = goPageUtil.goPage.checkLogin()
     if (!checkResult) {
       return
@@ -31,7 +31,7 @@ var postData = {
   /**
    * 保存活码
    */
-  saveSmartCode: function (data, sucCallback, failCallBack) {
+  saveSmartCode: function (data, sucCallback, failCallback) {
     var checkResult = goPageUtil.goPage.checkLogin()
     if (!checkResult) {
       return
@@ -51,11 +51,16 @@ var postData = {
       util.showMsg("缺少元素")
       return  false
     }
+ 
+    if(!util.objectUtil.verifyValidObject(data.ownerImg)){
+      data.ownerImg = ""
+    }
+
     if(data.eles.length > 2){
       util.showMsg("您目前只可配置2个元素")
       return  false
     }
-
+ 
     var array = data.eles
     for (let index = 0; index < array.length; index++) {
       const element = array[index];
@@ -76,17 +81,21 @@ var postData = {
         return  false
       }
     }
-
+    var oldEles = data.eles
+    data.eles = JSON.stringify(data.eles)
+   
     requestUtil.request({
       url: "/wmall/qrcode/saveSmartCode",
       data: data,
       method: 'POST',
-      successCallBack: function (data) {
+      successCallBack: function (result) {
+        data.eles = oldEles
         if (util.objectUtil.isFunction(sucCallback)) {
-          sucCallback(data)
+          sucCallback(result)
         }
       },
       failCallBack: function (m) {
+        data.eles = oldEles
         util.showMsg("保存活码失败!" + m)
         if (util.objectUtil.isFunction(failCallback)) {
           failCallback(data)
@@ -114,7 +123,13 @@ var postData = {
                 url: getApp().globalData.requestUrlPrefix + '/wmall/qrcode/upload', 
                 filePath: tempFilePaths[0],
                 name: 'file',
-                formData: {},
+                formData: {
+                  "token": getApp().globalData.token,
+                  "sessionId": getApp().globalData.sessionId,
+                  "v": 2,
+                  "t": Math.floor(new Date().getTime() / 1000),
+                  "appId": getApp().globalData.appId
+                },
                 success (res){
                   var resultStr = JSON.stringify(res)
                   res.data = JSON.parse(res.data)
@@ -265,7 +280,7 @@ var getData = {
       successCallBack: function (data) {
         console.log(data)
         if (util.jsonUtil.hasData(data)) {
-          getApp().addCache(cacheKey, data, 30)
+          getApp().addCache(cacheKey, data, 10)
         }
 
         if (util.objectUtil.isFunction(sucCallback)) {

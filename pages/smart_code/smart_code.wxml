@@ -13,9 +13,11 @@
             <image class="smart-code-img" src="{{imgPrefix + item.codeImg}}" show-menu-by-longpress='true'></image>
           </view>
           <view class="fr col50 content">
+            <view class="fs7 mt3">{{item.id}}<text class="cred fs6" wx:if="{{item.cache}}">(临)</text></view>
             <view class="fs8 mt3">{{item.title}}</view>
             <view class="operate-view">
-              <view class="col15 fr button"  data-id="{{item.id}}" bindtap="delSmartCode">删除</view>
+              <view wx:if="{{item.cache == undefined || item.cache == false}}" class="col15 fr button"  data-id="{{item.id}}" bindtap="delSmartCode">删除</view>
+              <view wx:if="{{item.cache}}" class="col15 fr button"  data-id="{{item.id}}" bindtap="saveSmartCode">保存</view>
               <view class="clearboth"></view>
             </view>
             

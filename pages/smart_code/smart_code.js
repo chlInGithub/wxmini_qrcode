@@ -13,6 +13,38 @@ Page({
     smartCodes: []
   },
 
+  saveSmartCode: function(event){
+    var id = util.eventUtil.getParaFromEvent(event, 'id')
+    var smartCode = util.arrayUtil.getEleById(this.data.smartCodes, id)
+    if(!util.objectUtil.verifyValidObject(smartCode)){
+      util.showMsg("数据不存在")
+      return false
+    }
+    var that = this
+    requestDataUtil.postData.saveSmartCode(
+      smartCode,
+      function(data){
+        smartCode.codeImg = data
+        smartCode.cache = false
+        var array = smartCode.eles
+        for (let index = 0; index < array.length; index++) {
+          const element = array[index];
+          element['cache'] = false
+        }
+
+        that.setData({
+          smartCodes: that.data.smartCodes
+        })
+
+        var temp = getApp().getCache("tempSmartCode", true)
+        if(util.objectUtil.verifyValidObject(temp)){
+          if(temp.id == smartCode.id){
+            getApp().delCache("tempSmartCode", true)
+          }
+        }
+      }
+      )
+  },
   delSmartCode: function(event){
     var id = util.eventUtil.getParaFromEvent(event, 'id')
     var ele = util.arrayUtil.getEleById(this.data.smartCodes, id)
@@ -28,12 +60,22 @@ Page({
         that.setData({
           smartCodes: that.data.smartCodes
         })
+        var temp = getApp().getCache("tempSmartCode", true)
+        if(util.objectUtil.verifyValidObject(temp)){
+          if(temp.id == id){
+            getApp().delCache("tempSmartCode", true)
+          }
+        }
       }
       )
   },
   goSmartCodeDetail: function(event){
     var id = util.eventUtil.getParaFromEvent(event, 'id', false)
     if(!util.objectUtil.verifyValidObject(id)){
+      var temp = getApp().getCache("tempSmartCode", true)
+      if(util.objectUtil.verifyValidObject(temp)){
+        return util.showMsg("请编辑并保存临时活码")
+      }
       id = 0
     }
     goPageUtil.goPage.goSmartCodeEdit("?id=" + id)
@@ -60,8 +102,19 @@ Page({
     var that = this 
     requestDataUtil.getData.smartCodeList(
       function(data){
-        if(!util.objectUtil.verifyValidObject(data)){
-          return
+        if(util.objectUtil.verifyValidObject(data)){
+          var temp = getApp().getCache("tempSmartCode", true)
+          if(util.objectUtil.verifyValidObject(temp)){
+            var index = util.arrayUtil.replaceEleById(data, temp)
+            if(index == -1){
+              data.push(temp)
+            }
+          }
+        }else{
+          var temp = getApp().getCache("tempSmartCode", true)
+          if(util.objectUtil.verifyValidObject(temp)){
+            data = [temp]
+          }
         }
         that.setData({
           smartCodes: data

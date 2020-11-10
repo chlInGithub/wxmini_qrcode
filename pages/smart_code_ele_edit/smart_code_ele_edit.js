@@ -12,6 +12,43 @@ Page({
   data: {
 
   },
+
+  tempModify: function(){
+    var key = this.data.smartCodeId
+    var eles = []
+    eles.push({
+      id: this.data.id,
+      title: this.data.title,
+      img: this.data.img,
+      sort: this.data.sort,
+      showMax: this.data.showMax,
+      showCount: this.data.showCount,
+      cache: true
+    })
+    getApp().addCache(key, eles, undefined, true)
+  },
+  bindblur4Title: function(){
+    if(this.data.oldTitle != this.data.title){
+      this.tempModify()
+    }
+  },
+  bindblur4Img: function(){
+    if(this.data.oldImg != this.data.img){
+      this.tempModify()
+    }
+  },
+  bindblur4Sort: function(){
+    if(this.data.oldSort != this.data.sort){
+      this.tempModify()
+    }
+  },
+  bindblur4Max: function(){
+    if(this.data.oldShowMax != this.data.showMax){
+      this.tempModify()
+    }
+  },
+
+
   saveEle: function(){
     if(!util.objectUtil.verifyValidObject(this.data.id) 
       || !util.objectUtil.verifyValidObject(this.data.smartCodeId)
@@ -32,7 +69,7 @@ Page({
       showMax: this.data.showMax,
       cache: true
     })
-    getApp().addCache(key, eles)
+    getApp().addCache(key, eles, undefined, true)
     wx.navigateBack({
       delta: 1,
     })
@@ -53,6 +90,7 @@ Page({
         that.setData({
           img: data
         })
+        that.bindblur4Img()
       }
     )
   },
@@ -89,7 +127,11 @@ Page({
       var img = options.img
       var sort = options.sort
       var showMax = options.showMax
-      var showCount = options.showCount
+      var oldTitle = options.title
+      var oldImg = options.img
+      var oldSort = options.sort
+      var oldShowMax = options.showMax
+      var showCount = util.objectUtil.verifyValidObject(options.showCount) ? options.showCount : 0
       this.setData({
         id: id,
         title: title,

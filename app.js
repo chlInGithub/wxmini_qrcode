@@ -5,9 +5,15 @@ const goPageUtil = require('utils/goPage.js')
 
 App({
   onLaunch: function () {
-    this.globalData.imgPrefix = "https://wmall.5jym.com/img/"
+    this.globalData.imgPrefix = "https://wx1f1bdedc539caf6a.5jym.com/img/"
     this.globalData.bgColor = '#EEEEEE'
-    this.globalData.requestUrlPrefix = "https://wmall.5jym.com"
+    this.globalData.requestUrlPrefix = "https://wx1f1bdedc539caf6a.5jym.com"
+    /* this.globalData.shopId = wx.getExtConfigSync().shopId,
+    this.globalData.tId = wx.getExtConfigSync().tId,
+    this.globalData.appId = wx.getExtConfigSync().appId */
+    this.globalData.shopId = "112009090953501",
+    this.globalData.tId = "0",
+    this.globalData.appId = "wx1f1bdedc539caf6a"
 
     // 登录
     wx.login({
@@ -28,8 +34,14 @@ App({
    * k: key
    * o: 数据
    * s: 超时相对秒数， 默认3600秒
+   * l: use storage
    */
-  addCache: function(k, o, s){
+  addCache: function(k, o, s, l){
+    if(util.objectUtil.verifyValidObject(l) && l == true){
+      wx.setStorageSync(k + "", o)
+      return;
+    }
+
     if (util.objectUtil.isUndefined(this.globalData.cache)) {
       this.globalData['cache'] = {}
     }
@@ -49,13 +61,22 @@ App({
 
     this.globalData['cache'][k] = val
   },
-  delCache: function(k){
+  delCache: function(k, l){
+    if(util.objectUtil.verifyValidObject(l) && l == true){
+      wx.removeStorageSync(k + "")
+      return;
+    }
+
     if (util.objectUtil.isUndefined(this.globalData.cache) || util.objectUtil.isUndefined(this.globalData.cache[k])) {
       return
     }
     this.globalData.cache[k] = undefined
   },
-  getCache: function(k){
+  getCache: function(k, l){
+    if(util.objectUtil.verifyValidObject(l) && l == true){
+      return wx.getStorageSync(k + "")
+    }
+
     if (util.objectUtil.isUndefined(this.globalData.cache) || util.objectUtil.isUndefined(this.globalData.cache[k])){
       return undefined
     }

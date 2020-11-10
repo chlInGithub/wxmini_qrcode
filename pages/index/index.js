@@ -3,6 +3,7 @@ const util = require('../../utils/util.js')
 const goPageUtil = require('../../utils/goPage.js')
 const requestUtil = require('../../utils/request.js')
 const requestDataUtil = require('../../utils/requestData.js')
+const tokenUtil = require('../../utils/token.js')
 
 //获取应用实例
 const app = getApp()
@@ -20,16 +21,24 @@ Page({
     })
   },
   onLoad: function () {
-    wx.login({
-      success: res => {
-        console.log(res)
-        var code = res.code
-        app.setLoginCode(code)
+    util.initPage(this)
+  },
+  onShow: function(){
+    // 登录系统 存储token
+    this.deal()
+  },
+  deal: function(){
+    var that = this
 
-        // TODO 
-        // return
+    tokenUtil.newToken(
+      function (res) {
         goPageUtil.goPage.goCapacity()
+      }, function () {
+        util.showMsg("获取token失败", function () {
+          goPageUtil.goPage.goIndex()
+        })
       }
-    })
+    )
+
   },
 })

@@ -14,7 +14,7 @@
     </view>
     <view class="cell mt10 fs8 pl10 pr10">
         <view class="col20 fl">活码标题</view>
-        <view class="col70 fl input-view"><input type="text" model:value="{{smartCodeTitle}}" maxlength='10' placeholder="最多10个字符"></input></view>
+        <view class="col70 fl input-view"><input bindblur="bindblur4title" type="text" model:value="{{smartCodeTitle}}" maxlength='10' placeholder="最多10个字符"></input></view>
         <view class="clearboth"></view>
     </view>
     <view class="cell mt10 fs8 pl10 pr10">

@@ -9,7 +9,7 @@
     "pages/smart_code_edit/smart_code_edit",
     "pages/smart_code_ele_edit/smart_code_ele_edit"
   ],
-  "entryPagePath": "pages/capacity/capacity",
+  "entryPagePath": "pages/index/index",
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
