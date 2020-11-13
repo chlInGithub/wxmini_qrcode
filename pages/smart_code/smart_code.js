@@ -72,12 +72,14 @@ Page({
   goSmartCodeDetail: function(event){
     var id = util.eventUtil.getParaFromEvent(event, 'id', false)
     if(!util.objectUtil.verifyValidObject(id)){
-      var temp = getApp().getCache("tempSmartCode", true)
-      if(util.objectUtil.verifyValidObject(temp)){
-        return util.showMsg("请编辑并保存临时活码")
-      }
       id = 0
     }
+
+    var temp = getApp().getCache("tempSmartCode", true)
+    if(util.objectUtil.verifyValidObject(temp) && temp.id != id){
+      return util.showMsg("请编辑并保存临时活码")
+    }
+
     goPageUtil.goPage.goSmartCodeEdit("?id=" + id)
   },
 

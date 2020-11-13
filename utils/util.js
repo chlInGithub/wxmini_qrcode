@@ -235,15 +235,20 @@ const JsonUtil = {
     return keys
   },
   /**
+   * @param paramJson 数据的json形式
+   * @param encode true表示对val进行URIEncode
    * key 排序，然后组织成用&间隔的参数串
    */
-  toParamWithSortedKey: function (paramJson){
+  toParamWithSortedKey: function (paramJson, encode){
     var keys = JsonUtil.getKeys(paramJson)
     var paraStr = ''
     var temp = []
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i]
       var val = paramJson[key]
+      if(encode){
+        val = encodeURIComponent(val)
+      }
       var ele = key + '=' + val
       temp.push(ele)
     }

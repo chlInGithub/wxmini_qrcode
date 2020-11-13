@@ -11,7 +11,7 @@
 }
 
 .border-1{
-  border: 3px solid #0099CC
+  border: 3px solid #1761FA
 }
 .border-2{
   border: 3px solid #00CC66
@@ -32,11 +32,15 @@
   margin-top: 5px;
 }
 .view-form .item{
-  width: 94%;
+  width: 90vw;
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
   border-radius: .5rem;
+}
+.view-form .item-padding{
+  padding-left: 2vw;
+  padding-right: 2vw;
 }
 
 
@@ -189,6 +193,9 @@ infoModalComponent .cell{
 .big-button{
   width: 90% !important
 }
+.button1761FA{
+  background-color: #1761FA;
+}
 
 .inline-block{
   display: inline-block
@@ -201,6 +208,12 @@ infoModalComponent .cell{
 }
 .ptb10{
   padding-top: 10px;
+  padding-bottom: 10px;
+}
+.pt10{
+  padding-top: 10px;
+}
+.pb10{
   padding-bottom: 10px;
 }
 .mr10{
@@ -277,6 +290,9 @@ infoModalComponent .cell{
   float: right;
 }
 
+.fs4{
+  font-size: .4rem;
+}
 .fs5{
   font-size: .5rem;
 }
@@ -307,6 +323,9 @@ infoModalComponent .cell{
 }
 .cblue{
   color: #0099CC
+}
+.cgreen{
+  color: green;
 }
 
 .borderradius0{
@@ -594,7 +613,12 @@ checkbox .wx-checkbox-input {
 }
 
 .input-view{
-  border-bottom: .3px solid #cccccc;
+  border-bottom: .3px solid #837e7e;
   padding-bottom: 3px;
   text-align: right;
+  font-size: 1rem;
+}
+
+.hide{
+  display: none;
 }

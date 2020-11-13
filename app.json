@@ -7,14 +7,15 @@
     "pages/see_code/see_code",
     "pages/smart_code/smart_code",
     "pages/smart_code_edit/smart_code_edit",
-    "pages/smart_code_ele_edit/smart_code_ele_edit"
+    "pages/smart_code_ele_edit/smart_code_ele_edit",
+    "pages/extend_power/extend_power"
   ],
   "entryPagePath": "pages/index/index",
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarBackgroundColor": "#1761FA",
     "navigationBarTitleText": "变.码",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

@@ -1,8 +1,8 @@
-// pages/capacity/capacity.js
+// pages/extend_power/extend_power.js
 const util = require('../../utils/util.js')
 const goPageUtil = require('../../utils/goPage.js')
-const requestUtil = require('../../utils/request.js')
 const requestDataUtil = require('../../utils/requestData.js')
+const tokenUtil = require('../../utils/token.js')
 
 Page({
 
@@ -10,31 +10,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    thirdNick: "",
+    mobile: ""
   },
 
-  showBYCode: function(){
+  saveUser: function(){
+    var data = {
+      thirdNick: this.data.thirdNick,
+      mobile: this.data.mobile
+    }
     var that = this
-    requestDataUtil.getData.getBYImg(
-      function(data){
-        var url = that.data.imgPrefix + data
-        wx.previewImage({
-          urls: [url]
+    requestDataUtil.postData.userInfo(
+      data,
+      function(){
+        that.data.simple.user.hasPhone = true
+        that.data.simple.user.thirdNick = data.thirdNick
+        getApp().globalData.simple = that.data.simple
+        that.setData({
+          simple: that.data.simple
         })
       }
     )
-    
-  },
-  go_gen_code: function() {
-    goPageUtil.goPage.goGenCode()
-  },
-
-  go_see_code: function(){
-    goPageUtil.goPage.goSeeCode()
-  },
-
-  go_smart_code: function(){
-    goPageUtil.goPage.goSmartCode()
   },
 
   /**
@@ -42,6 +38,16 @@ Page({
    */
   onLoad: function (options) {
     util.initPage(this)
+    var that = this
+    requestDataUtil.getData.getAdminImg(
+      function(data){
+        that.setData(
+          {
+            admin_img: data
+          }
+        )
+      }
+    )
   },
 
   /**

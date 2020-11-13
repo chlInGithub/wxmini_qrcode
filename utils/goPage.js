@@ -67,6 +67,11 @@ var goPage = {
     wx.navigateTo({
       url: '/pages/userInfo/userInfo'
     })
+  },
+  goExtendPower: function(){
+    wx.navigateTo({
+      url: '/pages/extend_power/extend_power'
+    })
   }
 }
 

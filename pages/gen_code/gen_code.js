@@ -12,8 +12,8 @@ Page({
   data: {
     origin_text: "",
     showCode: true,
-    codeBaseUrl: "https://wmall.5jym.com/wmall/qrcode/gen?text=",
-    schemas: ["-", "https://", "http://"],
+    codeBaseUrl: "https://wmall.5jym.com/wmall/qrcode/gen",
+    schemas: ["纯文本", "网址"],
     index: 1
   },
 
@@ -27,30 +27,36 @@ Page({
     var text = e.detail.value.origin_text
     if (text == undefined || text == "") {
       wx.showToast({
-        title: '请输入URL',
+        title: '请输入内容',
       })
       return
     }
 
     if(this.data.index > 0){
-      var schema = this.data.schemas[this.data.index]
-      text = schema + text
+      /* var schema = this.data.schemas[this.data.index]
+      text = schema + text*/
+      var oRegUrl = new RegExp(); 
+      oRegUrl.compile("^(https|http)://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");
+      if (!oRegUrl.test(text)) {
+        wx.showToast({
+          title: '网址格式错误',
+        })
+        return false;
+      }
     }
 
-    var oRegUrl = new RegExp();
-    oRegUrl.compile("^(https|http)://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");
-    if (!oRegUrl.test(text)) {
-      wx.showToast({
-        title: 'URL格式错误',
-      })
-      return false;
-    }
+    
 
-    var encoded = encodeURIComponent(text)
-    console.log(encoded)
-    var codeUrl = this.data.codeBaseUrl + encoded
-
-    wx.previewImage({
+    var encoded = text
+    var signParams = requestUtil.dealParams(this.data.codeBaseUrl, {
+      text: encoded
+    })
+    var codeUrl = this.data.codeBaseUrl + "?" + signParams
+    this.setData({
+      codeUrl: codeUrl,
+      text: text
+    })
+/*     wx.previewImage({
       urls: [codeUrl],
       success: function (res) {
         console.log(res)
@@ -61,7 +67,7 @@ Page({
           title: res,
         })
       }
-    })
+    }) */
   },
 
   /**

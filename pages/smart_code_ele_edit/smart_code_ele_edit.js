@@ -82,9 +82,14 @@ Page({
         height: 550
       },
       function(data){
-        if(util.objectUtil.verifyValidObject(that.data.img)){
+        if(util.objectUtil.verifyValidObject(that.data.img) && that.data.img != data){
           requestDataUtil.postData.delImg(
-            that.data.img
+            {
+              type: 2,
+              id: that.data.id,
+              parentId: that.data.smartCodeId,
+              img: that.data.img
+            }
             )
         }
         that.setData({
@@ -120,11 +125,13 @@ Page({
         id: id,
         title: "",
         sort: 1,
-        showMax: 99999
+        showMax: 99999,
+        showCount: 0,
+        img: false
       })
     } else {
       var title = options.title
-      var img = options.img
+      var img = util.objectUtil.verifyValidObject(options.img) ? options.img : false
       var sort = options.sort
       var showMax = options.showMax
       var oldTitle = options.title
@@ -154,7 +161,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.tempModify()
   },
 
   /**

@@ -1,0 +1,47 @@
+<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+</page-meta>
+
+<view class="container">
+  <view class="outter-view order-view">
+    <view class=" fs10 ta-c cred ptb10 pr10 pl10">
+      以下信息仅用于匹配用户账号和扩展用户能力
+      请确保准确
+    </view>
+  </view>
+
+  <block wx:if="{{simple.user.hasPhone}}">
+    <view class="outter-view order-view not-first-outter">
+      <view class="cell mt10 fs8 ptb10 pl10 pr10">
+        <view class="col20 fl">用户名</view>
+        <view class="col70 fl">{{simple.user.name}}</view>
+        <view class="clearboth"></view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="ptb10 outter-view not-first-outter">
+      <view class="cell mt10 fs8 pl10 pr10">
+        <view class="col20 fl">用户名</view>
+        <view class="col70 fl input-view"><input type="text" model:value="{{thirdNick}}" maxlength="10"></input></view>
+        <view class="clearboth"></view>
+      </view>
+      <view class="cell mt10 fs8 pl10 pr10">
+          <view class="col20 fl">联系电话</view>
+          <view class="col70 fl input-view"><input type="number" model:value="{{mobile}}" maxlength='11'></input></view>
+          <view class="clearboth"></view>
+      </view>
+    </view>
+    <view class="ptb10 outter-view not-first-outter">
+      <button class="fs8 big-button" type="primary" bindtap="saveUser">保存</button>
+    </view>
+  </block>
+
+  <block wx:if="{{admin_img}}">
+    <view class="ptb10 outter-view not-first-outter">
+      <view class=" fs8 ta-c cred ptb10 pr10 pl10">
+        扫码添加管理员微信，进一步商定扩展能力。
+      </view>
+      <image mode="widthFix" class="smart-code-img" src="{{imgPrefix + admin_img}}" show-menu-by-longpress='true'></image>
+    </view>
+  </block>
+</view>

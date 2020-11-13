@@ -15,6 +15,7 @@ var dealParams = function(url, data) {
   }
 
   var dataStrWithSortedKey = util.jsonUtil.toParamWithSortedKey(data)
+  var dataEncodeStrWithSortedKey = util.jsonUtil.toParamWithSortedKey(data, true)
 
   var newToken = url.indexOf('newToken') !== -1
   // 检查token
@@ -36,10 +37,13 @@ var dealParams = function(url, data) {
   var appendDataStrWithSortedKey = util.jsonUtil.toParam(appendData)
 
   var lastData = ""
+  var lastDataEncode = ""
   if (util.stringUtil.isEmpty(dataStrWithSortedKey)) {
     lastData = appendDataStrWithSortedKey
+    lastDataEncode = appendDataStrWithSortedKey
   } else {
     lastData = dataStrWithSortedKey + "&" + appendDataStrWithSortedKey
+    lastDataEncode = dataEncodeStrWithSortedKey + "&" + appendDataStrWithSortedKey
   }
 
   // 生成sign
@@ -49,7 +53,7 @@ var dealParams = function(url, data) {
   sign = util.replace4Spe(sign)
 
   // 最终的data数据
-  var finalData = lastData + "&sign=" + sign
+  var finalData = lastDataEncode + "&sign=" + sign
 
   //finalData = encodeURI(finalData)
   return finalData
@@ -179,115 +183,6 @@ var request = function(context) {
   })
 }
 
-/**
- * context = {
- *  url: url,
- *  data: data,
- *  method: method,
- *  successCallBack: successCallBack,
- *  failCallBack: failCallBack
- * }
- */
-var requestJson = function(context) {
-  var url = context.url
-  if (util.stringUtil.isEmpty(url)) {
-    util.showMsg("缺少URL")
-    return
-  }
-
-  var data = context.data
-  //data = dealParams(url, data)
-
-  url = getApp().globalData.requestUrlPrefix + url
-
-  var method = context.method
-  if (util.stringUtil.isEmpty(method)) {
-    method = "GET"
-  }
-  method = method.toUpperCase()
-
-  var contentType = "application/json"
-
-  var successCallBack = context.successCallBack
-  if (typeof successCallBack !== 'function') {
-    successCallBack = function() {}
-  }
-  var failCallBack = context.failCallBack
-  if (typeof failCallBack !== 'function') {
-    failCallBack = function() {}
-  }
-
-  wx.showLoading({
-    title: '努力处理中',
-  })
-
-  wx.request({
-    url: url,
-    data: data,
-    header: {
-      'content-type': contentType
-    },
-    method: method,
-    complete(res) {
-      wx.hideLoading()
-    },
-    fail(res) {
-      var resultStr = JSON.stringify(res)
-      if (resultStr.indexOf("未登录") !== -1) {
-        wx.showModal({
-          title: '提示',
-          content: '登录失效',
-          success(res) {
-            if (res.confirm) {
-              goPageUtil.goPage.goIndex()
-            }
-          }
-        })
-
-        return
-      }
-
-      failCallBack(resultStr)
-    },
-    success(res) {
-      var resultStr = JSON.stringify(res)
-
-      console.log(res.data)
-      if (res.data.s) {
-        if (util.objectUtil.isString(res.data.d)){
-          if (res.data.d == '[]'){
-            res.data.d = []
-          }
-          res.data.d = util.jsonUtil.toJson(res.data.d)
-        }
-        successCallBack(res.data.d)
-      } else {
-        if (resultStr.indexOf("未登录") !== -1) {
-          wx.showModal({
-            title: '提示',
-            content: '登录失效',
-            success(res) {
-              if (res.confirm) {
-                goPageUtil.goPage.goIndex()
-              }
-            }
-          })
-
-          return
-        }
-
-        var msg = res.data
-        if (util.objectUtil.isNotUndefined(res.data.m)) {
-          msg = res.data.m
-        } else if (util.objectUtil.isNotUndefined(res.data.message)){
-          msg = res.data.message
-        }
-        failCallBack(msg)
-      }
-    }
-  })
-}
-
 var requestProxy = function (context){
   //checkApp()
 
@@ -295,12 +190,10 @@ var requestProxy = function (context){
 
 
   request(context)
-
-  //requestJson(context)
 }
 
 
 module.exports = {
   request: requestProxy,
-  //dealParams: dealParams
+  dealParams: dealParams
 }

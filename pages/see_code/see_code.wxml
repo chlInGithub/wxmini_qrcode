@@ -3,12 +3,12 @@
 
 <view class="container">
   <view class="view-form">
-    <textarea name="origin_text" style="min-height:50px;color:black;" 
-      class="item border-1"
+    <textarea name="origin_text" style="min-height:20vh;color:black;" 
+      class="item item-padding border-1"
       bindblur="checkOriginValue" model:value="{{codeResult}}" auto-height="true"
       placeholder="扫描结果."  placeholder-style="color: red;" maxlength="100">
     </textarea>
-    <button bindtap="do_see_code" class="item" size="default" type="primary"> 识别二维码 </button>
+    <button bindtap="do_see_code" class="item fs8" size="default" type="primary"> 识别二维码 </button>
   </view>
   <image wx:if="{{text}}" mode="widthFix" src="{{text}}"></image>
 </view>

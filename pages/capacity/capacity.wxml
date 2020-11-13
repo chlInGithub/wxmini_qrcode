@@ -1,4 +1,4 @@
-<page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
+<page-meta page-style="min-height:100vh;background:url({{imgPrefix + '322cc17a1125a9f305adabe067dcdcda'}});">
 </page-meta>
 
 <view class="container">
@@ -48,4 +48,4 @@
     </view>
   </view>
 </view>
-<view class="fs5 footer" style="top:-1rem">由博予科技提供技术支持</view>
+<view class="fs4 footer" bindtap="showBYCode" style="top:-.8rem">由博予科技提供技术支持 by.5jym.com</view>

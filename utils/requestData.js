@@ -3,6 +3,29 @@ const requestUtil = require('./request.js')
 const goPageUtil = require('./goPage.js')
 
 var postData = {
+  userInfo: function (data,sucCallback, failCallback) {
+    var checkResult = goPageUtil.goPage.checkLogin()
+    if (!checkResult) {
+      return
+    }
+
+    requestUtil.request({
+      url: "/wmall/qrcode/userInfo",
+      method: 'POST',
+      data: data,
+      successCallBack: function (data) {
+        if (util.objectUtil.isFunction(sucCallback)) {
+          sucCallback(data)
+        }
+      },
+      failCallBack: function (m) {
+        util.showMsg("变更信息失败!" + m)
+        if (util.objectUtil.isFunction(failCallback)) {
+          failCallback(data)
+        }
+      }
+    })
+  },
   /**
    * 生成活码ID
    */
@@ -48,7 +71,7 @@ var postData = {
     }
     
     if(!util.objectUtil.verifyValidObject(data.eles)){
-      util.showMsg("缺少元素")
+      util.showMsg("缺少子码")
       return  false
     }
  
@@ -56,28 +79,28 @@ var postData = {
       data.ownerImg = ""
     }
 
-    if(data.eles.length > 2){
+    /* if(data.eles.length > 2){
       util.showMsg("您目前只可配置2个元素")
       return  false
-    }
+    } */
  
     var array = data.eles
     for (let index = 0; index < array.length; index++) {
       const element = array[index];
       if(!util.objectUtil.verifyValidObject(element.id)){
-        util.showMsg("缺少元素ID")
+        util.showMsg("缺少子码ID")
         return  false
       }
       if(!util.objectUtil.verifyValidObject(element.title)){
-        util.showMsg("缺少元素标题")
+        util.showMsg("缺少子码标题")
         return  false
       }
       if(!util.objectUtil.verifyValidObject(element.img)){
-        util.showMsg("缺少元素码图片")
+        util.showMsg("缺少子码二维码")
         return  false
       }
       if(!util.objectUtil.verifyValidObject(element.sort)){
-        util.showMsg("缺少元素优先级")
+        util.showMsg("缺少子码优先级")
         return  false
       }
     }
@@ -96,9 +119,19 @@ var postData = {
       },
       failCallBack: function (m) {
         data.eles = oldEles
-        util.showMsg("保存活码失败!" + m)
-        if (util.objectUtil.isFunction(failCallback)) {
-          failCallback(data)
+        var index = m.indexOf("LIMIT")
+        if(index != -1){
+          util.showMsg(
+            m,
+            function(){
+              goPageUtil.goPage.goExtendPower()
+            }
+          )
+        }else{
+          util.showMsg("保存活码失败!" + m)
+          if (util.objectUtil.isFunction(failCallback)) {
+            failCallback(m)
+          }
         }
       }
     })
@@ -116,11 +149,11 @@ var postData = {
           src: filePath,
           success(res){
             if(res.width > data.width || res.height > data.height){
-              util.showMsg("图片宽高要求" + data.width + "*" + data.height)
+              util.showMsg("图片尺寸不可大于" + data.width + "*" + data.height)
               return false
             }else{
               wx.uploadFile({
-                url: getApp().globalData.requestUrlPrefix + '/wmall/qrcode/upload', 
+                url: getApp().globalData.uploadPrefix + '/wmall/qrcode/upload', 
                 filePath: tempFilePaths[0],
                 name: 'file',
                 formData: {
@@ -238,14 +271,15 @@ var postData = {
       }
     })
   },
-  delImg: function (img, sucCallback, failCallback) {
-    if(!util.objectUtil.verifyValidObject(img)){
+  delImg: function (data, sucCallback, failCallback) {
+    if(!util.objectUtil.verifyValidObject(data) || !util.objectUtil.verifyValidObject(data.img) 
+    || !util.objectUtil.verifyValidObject(data.id) || !util.objectUtil.verifyValidObject(data.type)){
       util.showMsg("参数错误")
       return false
     }
     requestUtil.request({
       url: "/wmall/qrcode/delImg",
-      data: {img: img},
+      data: data,
       method: 'GET',
       successCallBack: function (data) {
         if (util.objectUtil.isFunction(sucCallback)) {
@@ -333,7 +367,106 @@ var getData = {
         }
       }
     })
-  }
+  },
+  smartCodeId: function (sucCallback, failCallback) {
+    requestUtil.request({
+      url: "/wmall/qrcode/smartCodeId",
+      data: {},
+      method: 'GET',
+      successCallBack: function (data) {
+        if (util.objectUtil.isFunction(sucCallback)) {
+          sucCallback(data)
+        }
+      },
+      failCallBack: function (m) {
+        util.showMsg("获取活码ID失败!" + m)
+        if (util.objectUtil.isFunction(failCallback)) {
+          failCallback(data)
+        }
+      }
+    })
+  },
+  getShopSimpleInfo: function(sucCallback) {
+    // cache
+    var cache = getApp().globalData.simple
+    if (util.objectUtil.verifyValidObject(cache)) {
+      if(util.objectUtil.isFunction(sucCallback)){
+        sucCallback()
+      }
+      return
+    }
+
+    requestUtil.request({
+      url: "/wmall/shop/simple",
+      data: {},
+      method: 'POST',
+      successCallBack: function(data){
+        getApp().globalData.simple = data
+        if (util.objectUtil.isFunction(sucCallback)) {
+          sucCallback()
+        }
+      },
+      failCallBack: function(m){
+        util.showMsg("获取店铺信息失败!" + m)
+      }
+    })
+  },
+  getAdminImg: function(sucCallback) {
+    // cache
+    var cacheKey = 'adminImg'
+    var cache = getApp().getCache(cacheKey)
+    if (util.objectUtil.verifyValidObject(cache)) {
+      if(util.objectUtil.isFunction(sucCallback)){
+        sucCallback(cache)
+      }
+      return
+    }
+
+    requestUtil.request({
+      url: "/wmall/qrcode/admin",
+      data: {},
+      method: 'GET',
+      successCallBack: function(data){
+        if (util.jsonUtil.hasData(data)) {
+          getApp().addCache(cacheKey, data)
+        }
+        if (util.objectUtil.isFunction(sucCallback)) {
+          sucCallback(data)
+        }
+      },
+      failCallBack: function(m){
+        util.showMsg("获取管理员联系方式失败!")
+      }
+    })
+  },
+  getBYImg: function(sucCallback) {
+    // cache
+    var cacheKey = 'bySiteImg'
+    var cache = getApp().getCache(cacheKey)
+    if (util.objectUtil.verifyValidObject(cache)) {
+      if(util.objectUtil.isFunction(sucCallback)){
+        sucCallback(cache)
+      }
+      return
+    }
+
+    requestUtil.request({
+      url: "/wmall/qrcode/by",
+      data: {},
+      method: 'GET',
+      successCallBack: function(data){
+        if (util.jsonUtil.hasData(data)) {
+          getApp().addCache(cacheKey, data)
+        }
+        if (util.objectUtil.isFunction(sucCallback)) {
+          sucCallback(data)
+        }
+      },
+      failCallBack: function(m){
+        util.showMsg("获取博予科技二维码失败!")
+      }
+    })
+  },
 }
 
 module.exports = {

@@ -5,15 +5,16 @@ const goPageUtil = require('utils/goPage.js')
 
 App({
   onLaunch: function () {
-    this.globalData.imgPrefix = "https://wx1f1bdedc539caf6a.5jym.com/img/"
     this.globalData.bgColor = '#EEEEEE'
-    this.globalData.requestUrlPrefix = "https://wx1f1bdedc539caf6a.5jym.com"
-    /* this.globalData.shopId = wx.getExtConfigSync().shopId,
+    this.globalData.requestUrlPrefix = "https://wmall.5jym.com"
+    this.globalData.shopId = wx.getExtConfigSync().shopId,
     this.globalData.tId = wx.getExtConfigSync().tId,
-    this.globalData.appId = wx.getExtConfigSync().appId */
-    this.globalData.shopId = "112009090953501",
+    this.globalData.appId = wx.getExtConfigSync().appId
+    this.globalData.imgPrefix = "https://" + this.globalData.appId + ".5jym.com/img/"
+    this.globalData.uploadPrefix = "https://" + this.globalData.appId + ".5jym.com"
+    /* this.globalData.shopId = "112009090953501",
     this.globalData.tId = "0",
-    this.globalData.appId = "wx1f1bdedc539caf6a"
+    this.globalData.appId = "wx1f1bdedc539caf6a" */
 
     // 登录
     wx.login({

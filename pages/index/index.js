@@ -1,7 +1,6 @@
 //index.js
 const util = require('../../utils/util.js')
 const goPageUtil = require('../../utils/goPage.js')
-const requestUtil = require('../../utils/request.js')
 const requestDataUtil = require('../../utils/requestData.js')
 const tokenUtil = require('../../utils/token.js')
 
@@ -32,7 +31,11 @@ Page({
 
     tokenUtil.newToken(
       function (res) {
-        goPageUtil.goPage.goCapacity()
+        requestDataUtil.getData.getShopSimpleInfo(
+          function(){
+            goPageUtil.goPage.goCapacity()
+          }
+        )
       }, function () {
         util.showMsg("获取token失败", function () {
           goPageUtil.goPage.goIndex()

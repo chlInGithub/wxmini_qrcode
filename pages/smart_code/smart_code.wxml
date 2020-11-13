@@ -10,12 +10,14 @@
       <view>
         <view class="inline-block ptb10">
           <view class="col45 fl img-view" bindtap="goSmartCodeDetail" data-id="{{item.id}}">
-            <image class="smart-code-img" src="{{imgPrefix + item.codeImg}}" show-menu-by-longpress='true'></image>
+            <image wx:if="{{item.codeImg}}" class="smart-code-img" src="{{imgPrefix + item.codeImg}}" show-menu-by-longpress='true'></image>
+            <image wx:else class="smart-code-img"></image>
+            <view wx:if="{{item.codeImg}}" class="cgreen fs6 ta-c">(长按二维码并保存)</view>
           </view>
           <view class="fr col50 content">
-            <view class="fs7 mt3">{{item.id}}<text class="cred fs6" wx:if="{{item.cache}}">(临)</text></view>
-            <view class="fs8 mt3">{{item.title}}</view>
-            <view class="operate-view">
+            <view class="fs7 mt3  hide">{{item.id}}<text class="cred fs6" wx:if="{{item.cache}}">(临)</text></view>
+            <view class="fs10 mt3">{{item.title}}<text class="cred fs6" wx:if="{{item.cache}}">(临)</text></view>
+            <view class="operate-view pt10">
               <view wx:if="{{item.cache == undefined || item.cache == false}}" class="col15 fr button"  data-id="{{item.id}}" bindtap="delSmartCode">删除</view>
               <view wx:if="{{item.cache}}" class="col15 fr button"  data-id="{{item.id}}" bindtap="saveSmartCode">保存</view>
               <view class="clearboth"></view>

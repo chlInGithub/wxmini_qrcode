@@ -4,17 +4,28 @@
 <view class="container">
   <view class="view-form">
     <form bindsubmit="bindFormSubmit">
-      <picker bindchange="bindPickerChange" model:value="{{index}}" range="{{schemas}}" class="item border-1" style="color: red;">
+      <picker bindchange="bindPickerChange" model:value="{{index}}" range="{{schemas}}" class="item item-padding border-1">
         <view wx:if="{{index > 0}}" class="picker">
-          已选择协议：{{schemas[index]}}。以下URL不可包含协议。
+          已选 网址 <text class="cred fs8">须以https或http开头</text>
         </view>
         <view wx:else class="picker">
-          没有选择协议。以下URL必须包含协议。
+          已选 纯文本
         </view>
       </picker>
-      <textarea name="origin_text" style="min-height:50px;color:black;" class="item border-1" model:value="{{origin_text}}" auto-height="true" placeholder="输入原始文本,最多100个文字." placeholder-style="color: red;" maxlength="100">
+      <textarea name="origin_text" style="min-height:20vh;color:black;" class="item item-padding border-1" model:value="{{origin_text}}" auto-height="true" placeholder="输入原始文本,最多100个文字." placeholder-style="color: red;" maxlength="100">
       </textarea>
-      <button class="item" size="default" type="primary" form-type="submit"> 生成二维码 </button>
+      <button class="item fs8" size="default" type="primary" form-type="submit"> 生成二维码 </button>
     </form>
   </view>
+
+  <block wx:if="{{codeUrl}}">
+    <view class="outter-view order-view not-first-outter">
+      <image mode="widthFix" style="width:70vw;" src="{{codeUrl}}" show-menu-by-longpress='true'></image>
+      <view class="cgreen fs6 ta-c">(长按二维码并保存)</view>
+      <view class="ta-c fs8 margin-auto"  style="width:90vw;" disabled="disabled">
+        {{text}}
+      </view>
+    </view> 
+
+  </block>
 </view>

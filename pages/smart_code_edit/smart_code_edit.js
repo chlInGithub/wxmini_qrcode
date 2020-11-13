@@ -74,10 +74,14 @@ Page({
         height: 90
       },
       function(data){
-        if(util.objectUtil.verifyValidObject(that.data.smartCode.ownerImg)){
+        if(util.objectUtil.verifyValidObject(that.data.smartCode.ownerImg) && that.data.smartCode.ownerImg != data){
           requestDataUtil.postData.delImg(
-            that.data.smartCode.ownerImg
-            )
+            {
+              type: 1,
+              id: that.data.smartCod.id,
+              img: that.data.smartCode.ownerImg
+            }
+          )
         }
 
         that.data.smartCodeOwnerImg = data
@@ -137,7 +141,7 @@ Page({
     var isNew = false
     if(!util.objectUtil.verifyValidObject(id) || id == 0){
       // gen id
-      id = new Date().getTime()
+      // id = new Date().getTime()
       isNew = true
     }
     
@@ -195,9 +199,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(this.data.isNew){
-      this.appendLocalEle(this)
-      this.tempModify()
+    var that = this
+    if(this.data.isNew && this.data.smartCode.id == 0){
+      requestDataUtil.getData.smartCodeId(
+        function(data){
+          that.data.smartCode.id = data
+          that.setData({
+            smartCode: that.data.smartCode
+          })
+          that.tempModify()
+        },
+        function(){
+          wx.navigateBack()
+        }
+      )
+      //this.appendLocalEle(this)
+      //this.tempModify()
       return true
     }
 
