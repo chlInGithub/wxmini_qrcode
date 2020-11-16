@@ -21,9 +21,6 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "mp-navigation-bar": "/miniprogram_npm/weui-miniprogram/navigation-bar/navigation-bar"
-  },
-  "useExtendedLib": {
-    "weui": true
+    "mp-navigation-bar": "/components/navigation-bar/navigation-bar"
   }
 }
