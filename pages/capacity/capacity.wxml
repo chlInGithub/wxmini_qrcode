@@ -1,6 +1,10 @@
 <page-meta page-style="min-height:100vh;background:url({{imgPrefix + '322cc17a1125a9f305adabe067dcdcda'}});">
 </page-meta>
 
+<mp-navigation-bar loading="{{false}}" show="{{true}}" animated="{{false}}" back="{{false}}">
+  <view slot="center" class="fs10 cwhite">变.码</view>
+</mp-navigation-bar>
+
 <view class="container">
   <view class="full-width-view view-head mt5">
     <view><image src="/img/hand.jpg" mode="aspectFix"></image></view>

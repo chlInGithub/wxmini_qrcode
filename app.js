@@ -5,6 +5,7 @@ const goPageUtil = require('utils/goPage.js')
 
 App({
   onLaunch: function () {
+    this.globalData.navBGColor = "#1761FA"
     this.globalData.bgColor = '#EEEEEE'
     this.globalData.requestUrlPrefix = "https://wmall.5jym.com"
     this.globalData.shopId = wx.getExtConfigSync().shopId,

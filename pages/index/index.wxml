@@ -1,6 +1,10 @@
 <page-meta1 page-style="background:linear-gradient(to right,#FF8300,#FF7300)">
 </page-meta1>
 
+<mp-navigation-bar background="{{navBGColor}}" loading="{{false}}" show="{{true}}" animated="{{false}}" back="{{false}}">
+  <view slot="center" class="fs10 cwhite">变.码</view>
+</mp-navigation-bar>
+
 <view class="container" style="padding-top:150px">
   <view class="page-body">
     <view>

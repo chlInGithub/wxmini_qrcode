@@ -15,8 +15,15 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#1761FA",
     "navigationBarTitleText": "变.码",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "mp-navigation-bar": "/miniprogram_npm/weui-miniprogram/navigation-bar/navigation-bar"
+  },
+  "useExtendedLib": {
+    "weui": true
+  }
 }

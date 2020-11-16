@@ -1,6 +1,10 @@
 <page-meta page-style="background-color:{{bgColor}};min-height:100vh;">
 </page-meta>
 
+<mp-navigation-bar background="{{navBGColor}}" loading="{{false}}" show="{{true}}" animated="{{false}}" back="{{true}}">
+  <view slot="center" class="fs10 cwhite">变.码</view>
+</mp-navigation-bar>
+
 <view class="container">
   <view class="ptb10 outter-view border-1">
     <view wx:if="{{smartCode.codeImg}}" class="cell mt10 fs8 pl10 pr10">
