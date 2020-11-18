@@ -2,12 +2,12 @@ const util = require("./util.js")
 
 var goPage = {
   goIndex: function () {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/index/index'
     })
   },
   goCapacity: function () {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/capacity/capacity'
     })
   },

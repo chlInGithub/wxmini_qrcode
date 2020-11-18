@@ -38,7 +38,7 @@
         <view class="clearboth"></view>
     </view>
   </view>
-  <view class="ptb10 outter-view  not-first-outter fs6 cgray ta-l">
+  <view class="ptb10 outter-view  not-first-outter fs8 cgray ta-l">
     <view class="cell pl10 pr10">
       子码选择规则
     </view>
