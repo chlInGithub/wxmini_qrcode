@@ -145,7 +145,11 @@ Page({
         img: img,
         sort: sort,
         showMax: showMax,
-        showCount: showCount
+        showCount: showCount,
+        oldTitle: oldTitle,
+        oldImg: oldImg,
+        oldSort: oldSort,
+        oldShowMax: oldShowMax
       })
     }
   },
@@ -161,7 +165,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.tempModify()
+   // this.tempModify()
   },
 
   /**

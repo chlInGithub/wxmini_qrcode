@@ -9,6 +9,20 @@
   <view class="ptb10 outter-view">
         <button class="fs8 big-button" type="primary" bindtap="goSmartCodeDetail">新建活码</button>
   </view>
+  <view class="ptb10 outter-view  not-first-outter fs8 cgray ta-l">
+    <view class="cell pl10 pr10">
+      活码是什么？
+    </view>
+    <view class="cell pl10 pr10">
+      一个活码二维码可以关联多个二维码。当用户扫描活码二维码后，活码系统向用户提供一个可用的二维码。
+    </view>
+    <view class="cell pl10 pr10">
+      解决商家在使用二维码过程中遇到的一些问题，例如微信群二维码失效。
+    </view>
+    <view class="cell pl10 pr10">
+      变.码 为客户提供简洁的活码管理，让客户快速拥有属于自己的活码。
+    </view>
+  </view>
   <block wx:if="{{smartCodes}}" wx:for="{{smartCodes}}" wx:key="*this">
     <view class="outter-view order-view not-first-outter">
       <view>

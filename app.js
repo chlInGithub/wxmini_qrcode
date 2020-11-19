@@ -13,9 +13,8 @@ App({
     this.globalData.appId = wx.getExtConfigSync().appId
     this.globalData.imgPrefix = "https://" + this.globalData.appId + ".5jym.com/img/"
     this.globalData.uploadPrefix = "https://" + this.globalData.appId + ".5jym.com"
-    /* this.globalData.shopId = "112009090953501",
-    this.globalData.tId = "0",
-    this.globalData.appId = "wx1f1bdedc539caf6a" */
+    this.globalData.shopImg = this.globalData.imgPrefix + wx.getExtConfigSync().shopImg
+
 
     // 登录
     wx.login({

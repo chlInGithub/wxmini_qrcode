@@ -125,7 +125,7 @@ Page({
       id = 0
       param = "smartCodeId=" + this.data.smartCode.id + "&id=" + id
     }else{
-      var ele = util.arrayUtil.delEleById(this.data.eles, id)
+      var ele = util.arrayUtil.getEleById(this.data.eles, id)
       param = "smartCodeId=" + this.data.smartCode.id + "&id=" + id + "&img=" + ele.img + "&title=" + ele.title + "&sort=" + ele.sort + "&showMax=" + ele.showMax + "&showCount=" + ele.showCount
     }
     goPageUtil.goPage.goSmartCodeEleEdit( "?" + param)

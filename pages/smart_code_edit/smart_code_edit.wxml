@@ -27,7 +27,7 @@
         <view class="col70 fl input-view">
           <view class="operate-view">
             <view class="button fr fs8" bindtap="chooseOwnerImg">
-              选择图片
+              {{smartCodeOwnerImg != undefined && smartCodeOwnerImg.length > 0 ? "变更" : "选择"}}图片
               <view class="fs6 cred">(选填)</view>
             </view>
           </view>
@@ -83,7 +83,7 @@
     </view>
   </block>
   <view class="ptb10 outter-view not-first-outter" wx:if="{{!saveDone}}">
-    <button class="fs8 big-button" type="primary" bindtap="editEle">新增子码</button>
+    <button class="fs8 big-button button1761FA" type="primary" bindtap="editEle">新增子码</button>
     <button class="fs8 big-button mt10" type="primary" bindtap="save">保存</button>
   </view>
 </view>

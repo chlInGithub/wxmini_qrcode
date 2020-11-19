@@ -51,5 +51,10 @@
       <view class="clearboth"></view>
     </view>
   </view>
+  <view class="ptb10 outter-view  not-first-outter fs7 cgray ta-c no-bc">
+    <view class="cell pl10 pr10">
+      变.码 商家二维码生态系统
+    </view>
+  </view>
 </view>
-<view class="fs4 footer" bindtap="showBYCode" style="top:-.8rem">由博予科技提供技术支持 by.5jym.com</view>
+<view class="fs4 footer bc1761FA" bindtap="showBYCode" style="top:-.8rem">由博予科技提供技术支持 by.5jym.com</view>

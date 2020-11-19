@@ -14,9 +14,11 @@
     </view>
   </view>
   <view class="ptb10 outter-view not-first-outter">
+<!--     
     <view wx:if="{{img.length > 10}}" class="cell mt10 fs8 pl10 pr10">
       <image class="smart-code-img" src="{{imgPrefix + img}}" show-menu-by-longpress='true'></image>
     </view>
+ -->
     
     <view class="cell mt10 fs8 pl10 pr10  hide">
         <view class="col20 fl">子码ID</view>
@@ -46,9 +48,17 @@
     <view class="cell mt10 fs8 pl10 pr10">
         <view class="col20 fl">子码<text class="cred">*</text></view>
         <view class="col70 fl input-view">
-          <view class="operate-view">
-            <view class="button fr" bindtap="chooseImg">选择图片</view>
+          <view class="operate-view fr">
+            <view class="button fr" bindtap="chooseImg">
+              {{img != undefined && img.length > 0 ? "变更" : "选择"}}
+              <view>二维码</view>
+            </view>
+            <view class="clearboth"></view>
           </view>
+          <view wx:if="{{img.length > 10}}" class="cell mt10 fs8 pl10 pr10 fr">
+            <image class="smart-code-img" src="{{imgPrefix + img}}" show-menu-by-longpress='true'></image>
+          </view>
+          <view class="clearboth"></view>
         </view>
         <view class="clearboth"></view>
     </view>

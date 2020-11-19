@@ -196,7 +196,10 @@ infoModalComponent .cell{
   width: 90% !important
 }
 .button1761FA{
-  background-color: #1761FA;
+  background-color: #1761FA !important;
+}
+.bc1761FA{
+  background-color: #1761FA !important;
 }
 
 .inline-block{
@@ -352,6 +355,9 @@ checkbox .wx-checkbox-input {
   text-align: center;
 }
 
+.no-bc{
+  background-color: unset !important;
+}
 .not-first-outter{
   margin-top: 5px;
 }
@@ -611,7 +617,7 @@ checkbox .wx-checkbox-input {
   border: 0.5px solid #ccc;
   border-radius: 8px;
   text-align: center;
-  font-size: .6rem;
+  font-size: .8rem;
 }
 
 .input-view{
