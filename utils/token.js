@@ -7,15 +7,29 @@ var getCurrentS = function(){
 }
 
 var newToken = function(successCallBack, failCallBack) {
-  // check has token
-  if (util.objectUtil.verifyValidObject(getApp().globalData.expire) &&
-    util.objectUtil.verifyValidObject(getApp().globalData.token) &&
-    util.objectUtil.verifyValidObject(getApp().globalData.sessionId) &&
-    getApp().globalData.expire > getCurrentS()) {
-    successCallBack()
+  // get from local
+  const app = getApp()
+  // 打开小程序 复用上次的local token；如果出现登录超时，则重新进入index，非重新打开app，则不使用local token。
+  var key = app.globalData.appId + "Token"
+  if(app.globalData.hasUsedLocalToken != true){
+    var tokenCache = app.getCache(key, true)
+    if(util.objectUtil.verifyValidObject(tokenCache)){
+      app.globalData.expire = tokenCache.expire
+      app.globalData.token = tokenCache.token
+      app.globalData.sessionId = tokenCache.sessionId
+      app.globalData.hasUsedLocalToken = true
+    }
+
+    // check has token
+    if (util.objectUtil.verifyValidObject(getApp().globalData.expire) &&
+      util.objectUtil.verifyValidObject(getApp().globalData.token) &&
+      util.objectUtil.verifyValidObject(getApp().globalData.sessionId) &&
+      getApp().globalData.expire > getCurrentS()) {
+      return successCallBack()
+    }
+  }else{
+    getApp().delCache(key, true)
   }
-
-
 
   var sucCall = function(d) {
     console.log(d)
@@ -24,6 +38,7 @@ var newToken = function(successCallBack, failCallBack) {
     // 检查token数据
     if (!util.objectUtil.verifyValidObject(d.expire) || !util.objectUtil.verifyValidObject(d.token) ||
       !util.objectUtil.verifyValidObject(d.sessionId) || getCurrentS() > d.expire) {
+        getApp().delCache(key, true)
       util.showMsg("token错误")
       return false
     }
@@ -32,12 +47,14 @@ var newToken = function(successCallBack, failCallBack) {
     getApp().globalData.token = d.token
     getApp().globalData.sessionId = d.sessionId
 
-    successCallBack()
+    getApp().addCache(key, d, null, true)
+
+    return successCallBack()
   }
   var failCall = function(res) {
     console.log(res)
     console.log("failCall")
-    failCallBack(res)
+    return failCallBack(res)
   }
   wx.login({
     success: res => {

@@ -173,7 +173,12 @@ var postData = {
                       }
                       res.data.d = util.jsonUtil.toJson(res.data.d)
                     }
-                    sucCallBack(res.data.d)
+                    if(util.objectUtil.isFunction(sucCallBack)){
+                      sucCallBack(res.data.d)
+                    }else{
+                      util.showToast("上传图片成功")
+                    }
+                    
                   } else {
                     if (resultStr.indexOf("未登录") !== -1) {
                       wx.showModal({
@@ -195,7 +200,12 @@ var postData = {
                     } else if (util.objectUtil.isNotUndefined(res.data.message)){
                       msg = res.data.message
                     }
-                    failCallBack(msg)
+                    if(util.objectUtil.isFunction(failCallBack)){
+                      failCallBack(msg)
+                    }else{
+                      util.showToast("上传图片失败。" + msg)
+                    }
+                    
                   }
                 },
                 fail (res){
@@ -213,8 +223,11 @@ var postData = {
       
                     return
                   }
-      
-                  failCallBack(resultStr)
+                  if(util.objectUtil.isFunction(failCallBack)){
+                    failCallBack(resultStr)
+                  }else{
+                    util.showToast("上传图片失败。" + resultStr)
+                  }
                 }
               })
             }
