@@ -22,7 +22,7 @@
     </form>
   </view>
 
-  <block wx:if="{{codeUrl}}">
+<!--   <block wx:if="{{codeUrl}}">
     <view class="outter-view order-view not-first-outter">
       <image mode="widthFix" style="width:70vw;" src="{{codeUrl}}" show-menu-by-longpress='true'></image>
       <view class="cgreen fs6 ta-c">(长按二维码并保存)</view>
@@ -31,5 +31,14 @@
       </view>
     </view> 
 
-  </block>
+  </block> -->
+
+  <view class="not-first-outter">
+      <canvas class="canvas-code" bindtap="previewImage" canvas-id="myQrcode" style="background:{{bgColor}};width: 200px;height: 200px;margin:auto;"/>
+      <view wx:if="{{show}}" bindtap="previewImage" class="cgreen fs6 ta-c">(点击预览二维码并保存)</view>
+      <view class="ta-c fs8 margin-auto"  style="width:90vw;" disabled="disabled">
+        {{text}}
+      </view>
+    </view> 
+  
 </view>

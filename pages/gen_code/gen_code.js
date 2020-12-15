@@ -3,7 +3,7 @@ const util = require('../../utils/util.js')
 const goPageUtil = require('../../utils/goPage.js')
 const requestUtil = require('../../utils/request.js')
 const requestDataUtil = require('../../utils/requestData.js')
-
+const qrcode = require('../../utils/qrcode.js')
 Page({
 
   /**
@@ -45,9 +45,37 @@ Page({
       }
     }
 
+    var curThat = this
+
+    curThat.setData(
+      {
+        codeUrl: "",
+        show: false,
+        text: "稍等片刻..."
+      }
+    )
+
+    new qrcode('myQrcode',{
+      text: text,
+      width: 200,
+      height: 200,
+      padding: 12, // 生成二维码四周自动留边宽度，不传入默认为0
+      correctLevel: qrcode.CorrectLevel.L, // 二维码可辨识度
+      callback: (res) => {
+        console.log(res)
+        var codeUrl = res.path
+        curThat.setData(
+         {
+           codeUrl: codeUrl,
+           show: true,
+           text: text
+         }
+       )
+      }
+    })
     
 
-    var encoded = text
+/*     var encoded = text
     var signParams = requestUtil.dealParams(this.data.codeBaseUrl, {
       text: encoded
     })
@@ -55,7 +83,7 @@ Page({
     this.setData({
       codeUrl: codeUrl,
       text: text
-    })
+    }) */
 /*     wx.previewImage({
       urls: [codeUrl],
       success: function (res) {
@@ -68,6 +96,12 @@ Page({
         })
       }
     }) */
+  },
+
+  previewImage: function(){
+    wx.previewImage({
+      urls: [this.data.codeUrl],
+    })
   },
 
   /**

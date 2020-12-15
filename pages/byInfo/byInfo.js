@@ -1,8 +1,8 @@
-// pages/capacity/capacity.js
+// pages/byInfo/byInfo.js
 const util = require('../../utils/util.js')
 const goPageUtil = require('../../utils/goPage.js')
-const requestUtil = require('../../utils/request.js')
 const requestDataUtil = require('../../utils/requestData.js')
+const tokenUtil = require('../../utils/token.js')
 
 Page({
 
@@ -13,26 +13,23 @@ Page({
 
   },
 
-  showBYCode: function(){
-    goPageUtil.goPage.goBYInfo()
-  },
-  go_gen_code: function() {
-    goPageUtil.goPage.goGenCode()
-  },
-
-  go_see_code: function(){
-    goPageUtil.goPage.goSeeCode()
-  },
-
-  go_smart_code: function(){
-    goPageUtil.goPage.goSmartCode()
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     util.initPage(this)
+
+    var that = this
+    requestDataUtil.getData.getBYImg(
+      function(data){
+        var url = that.data.imgPrefix + data
+        that.setData(
+          {
+            url: url
+          }
+        )
+      }
+    )
   },
 
   /**
