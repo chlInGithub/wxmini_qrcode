@@ -127,6 +127,7 @@ var request = function(context) {
       wx.hideLoading()
     },
     fail(res) {
+      wx.hideLoading()
       var resultStr = JSON.stringify(res)
       if (resultStr.indexOf("未登录") !== -1) {
         wx.showModal({
@@ -145,6 +146,7 @@ var request = function(context) {
       failCallBack(resultStr)
     },
     success(res) {
+      wx.hideLoading()
       var resultStr = JSON.stringify(res)
 
       console.log(res.data)
