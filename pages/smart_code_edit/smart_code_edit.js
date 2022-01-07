@@ -1,7 +1,6 @@
 // pages/smart_code_edit/smart_code_edit.js
-const util = require('../../utils/util.js')
+const util = require("wxmini_common_js").util
 const goPageUtil = require('../../utils/goPage.js')
-const requestUtil = require('../../utils/request.js')
 const requestDataUtil = require('../../utils/requestData.js')
 
 Page({

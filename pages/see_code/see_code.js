@@ -1,5 +1,5 @@
 // pages/see_code/see_code.js
-const util = require('../../utils/util.js')
+const util = require("wxmini_common_js").util
 
 Page({
 
